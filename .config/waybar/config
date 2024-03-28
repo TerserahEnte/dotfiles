@@ -1,32 +1,42 @@
+
 {
-     "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    "width": 1920, // Waybar width
-    "spacing": 12, // Gaps between modules (4px)
+     "layer": "top", 
+    "height": 30, 
+    "width": 1500, 
+    "spacing": 12, 
     "margin-top": 12,
-    // Choose the order of the modules
-    "modules-left": [ "sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media" , "sway/window"],
-    "modules-center": ["group/cpuall", "clock","memory"],
-    "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "keyboard-state", "sway/language", "group/batterylight"],
-    // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+
+    "modules-left": [ "group/leftbar" ,"hyprland/window"],
+    "modules-center": ["group/cpuall", "cava","memory"],
+    "modules-right": [  "network",  "pulseaudio", "tray", "group/batterylight", "group/group-power"],
+
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+         "format-icons": {
+             "1": "1",
+             "2": "2",
+             "3": "3",
+             "4": "4",
+             "5": "5",
+             "6": "",
+             "urgent": "",
+             "focused": "",
+            "default": ""
+        },
+
+        "actions": {
+            "on-scroll-up": "hyprctl dispatch workspace e+1",
+            "on-scroll-down": "hyprctl dispatch workspace e-1"
+        }
+
+   },
+
+
+
+
     "keyboard-state": {
+        "interval": 1,
         "numlock": true,
         "capslock": true,
         "format": "{name} {icon}",
@@ -35,16 +45,7 @@
             "unlocked": ""
         }
     },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
+
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
@@ -71,71 +72,75 @@
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
+
     "tray": {
-        // "icon-size": 21,
+
         "spacing": 10
     },
 
-  "clock": {
-  	"format": "{: %H:%M }",
-  	"tooltip-format": "<tt><small>{calendar}</small></tt>",
-  	"calendar": {
-  		"mode"          : "year",
-  		"mode-mon-col"  : 3,
-  		"on-scroll"     : 1,
-  		"on-click-right": "mode",
-  		"format": {
-  			"months":     "<span color='#ffead3'><b>{}</b></span>",
-  			"days":       "<span color='#ffffff'><b>{}</b></span>",
-  			"weekdays":   "<span color='#ADC2DB'><b>{}</b></span>",
-  			"today":      "<span color='#A0725C'><b><u>{}</u></b></span>"
-  		}
-  	},
-  	"actions": {
-  		"on-click-right": "mode",
-  		"on-click-forward": "tz_up",
-  		"on-click-backward": "tz_down",
-  		"on-scroll-up": "shift_up",
-  		"on-scroll-down": "shift_down"
-  	}
-  },
 
+    "clock": {
+        "format": "{:%H:%M}  |",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span font_desc='JetBrains Mono' color='#ffead3'><b>{}</b></span>",
+                "days":       "<span font_desc='JetBrains Mono' color='#ffffff'><b>{}</b></span>",
+                "weekdays":   "<span font_desc='JetBrains Mono' color='#ADC2DB'><b>{}</b></span>",
+                "today":      "<span font_desc='JetBrains Mono' color='#A0725C'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
     "cpu": {
-        "min-length": 3,
         "interval": 1,
-        "format": "{avg_frequency} GHz /",
-        //"format": "{usage}% ",
+        "format": "{avg_frequency} GHz",
+
         "tooltip": false
         
     },
 
     "memory": {
-        //"format": "{}% "
+        "interval": 2,
+
         "format": "{used} GiB / {total} GiB"
     },
 
+    "custom/cpuavg": {
+        
+        "exec":"$HOME/.config/waybar/custom/cpufreqavg.sh",
+        "format": "{} GHz | ",
+        "escape": true,
+        "restart-interval": 1 
+    },
+
     "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        //"format": "{temperatureC}°C {icon}",
+        "interval": 1,
+
+         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "critical-threshold": 95,
+        "format-critical": "{temperatureC}°C",
+
         "format": "{temperatureC}°C",
         "format-icons": ["", "", ""]
     },
 
 
     "group/cpuall": {
-        "orientation": "horizontal",
+        "orientation": "inherit",
+        "align": 1,
         "modules": [
-            "cpu",
+            "custom/cpuavg",
             "temperature"
         ]
     },
@@ -144,13 +149,13 @@
 
 
     "backlight": {
-        // "device": "acpi_video1",
+
         "format": "{percent}% {icon} |",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", "", "", ""]
     },
     "battery": {
         "states": {
-            // "good": 95,
+
             "warning": 30,
             "critical": 15
         },
@@ -158,8 +163,7 @@
         "format-charging": "{capacity}% ",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
+
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
@@ -174,17 +178,27 @@
         ]
     },
 
+    "group/leftbar": {
+        "orientation": "horizontal",
+        "modules": [
+            "clock",
+            "hyprland/workspaces"
+        ]
+    },
+
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
+        "interval": 1,
+        "format-wifi": "{bandwidthUpBytes}  {bandwidthDownBytes} ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{bandwidthUpBytes}  {bandwidthDownBytes} ",
+        "tooltip-format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
+        "width": "{volume}%",
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
@@ -211,8 +225,89 @@
             "default": "🎜"
         },
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
-}
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" 
+    },
 
+    "cava": {
+        "framerate": 24,
+        "autosens": 1,
+        "sensitivity": 2,
+        "bars": 14,
+        "lower_cutoff_freq": 20,
+        "higher_cutoff_freq": 350,
+        "method": "pulse",
+        "source": "auto",
+        "sample_rate": 44100,
+        "sample_bits": 16,
+        "stereo": false,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": true,
+        "waves": false,
+        "noise_reduction": 0.10,
+        "input_delay": 2,
+        "sleep_timer": 5,
+        "format-icons" : ["<span font_desc='JetBrains Mono'>▁</span>", "<span font_desc='JetBrains Mono'>▂</span>", "<span font_desc='JetBrains Mono'>▃</span>", "<span font_desc='JetBrains Mono'>▄</span>", "<span font_desc='JetBrains Mono'>▅</span>", "<span font_desc='JetBrains Mono'>▆</span>", "<span font_desc='JetBrains Mono'>▇</span>", "<span font_desc='JetBrains Mono'>█</span>" ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+
+
+
+
+    "group/group-power": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/power",
+
+            "custom/ideapad_conservative",
+            "idle_inhibitor",
+
+            "custom/quit",
+            "custom/reboot"
+        ]
+    },
+    "custom/quit": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "reboot"
+    },
+    "custom/ideapad_conservative": {
+        "exec":"$HOME/.config/waybar/custom/lenovo_conservation_check.sh",
+        "restart-interval": 10,
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "pkexec /home/kayagi/.config/waybar/custom/lenovo_conservation.sh "
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "shutdown now"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "tooltip": false,
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    }
+
+}
