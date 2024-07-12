@@ -1,0 +1,402 @@
+
+{
+     "layer": "top", 
+    "height": 30,
+    "position": "top", 
+    //"width": 1500, 
+    "spacing": 5, 
+    "margin-top": 5,
+    "margin-left": 12,
+    "margin-right": 12,
+
+    //"modules-left": [ "group/leftbar" ,"hyprland/window"],
+    "modules-left": ["pulseaudio" ,"image", "custom/mediaplayer", "cava"],
+    //"modules-center": ["group/cpuall", "cava","memory", "wlr/taskbar"],
+    "modules-center": ["clock","hyprland/workspaces", "custom/test", "wlr/taskbar", "group/batterylight"],
+    "modules-right": ["network", "tray", "cpu", "temperature", "memory"  , "group/group-power"],
+
+
+    "image": {
+        "path": "/tmp/waybar-mediaplayer-art",
+        "size": 32,
+        "signal": 4,
+        "on-click": "feh --auto-zoom --borderless --title 'feh-float' /tmp/waybar-mediaplayer-art"
+      },
+
+
+
+
+      "custom/mediaplayer": {
+          "exec": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer monitor",
+          "return-type": "json",
+          "format": "{}",
+          "on-click": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer play-pause",
+          "on-scroll-up": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer next",
+          "on-scroll-down": "$HOME/.config/waybar/waybar-mediaplayer/src/mediaplayer previous",
+          "min-length": 20,
+          "max-length": 20
+      },
+
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 14,
+        "icon-theme": "Papirus-Dark",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "ignore-list": [
+            "Alacritty",
+            "kitty"
+        ],
+        "app_ids-mapping": {
+            "firefoxdeveloperedition": "firefox-developer-edition"
+        },
+        "rewrite": {
+            "Firefox Web Browser": "Firefox",
+            "Foot Server": "Terminal"
+        }
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+         "format-icons": {
+             "1": "",
+             "2": "",
+             "3": "",
+             "4": "",
+             "5": "",
+             "6": "",
+             "urgent": "",
+             "focused": "",
+            "default": ""
+        },
+
+        "actions": {
+            "on-scroll-up": "hyprctl dispatch workspace e+1",
+            "on-scroll-down": "hyprctl dispatch workspace e-1"
+        }
+
+   },
+
+
+
+
+    "keyboard-state": {
+        "interval": 1,
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+
+    "tray": {
+
+        "spacing": 10
+    },
+
+
+    "clock": {
+        "format": "{:%b %e, %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span font_desc='JetBrains Mono' color='#ffead3'><b>{}</b></span>",
+                "days":       "<span font_desc='JetBrains Mono' color='#ffffff'><b>{}</b></span>",
+                "weekdays":   "<span font_desc='JetBrains Mono' color='#ADC2DB'><b>{}</b></span>",
+                "today":      "<span font_desc='JetBrains Mono' color='#A0725C'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "cpu": {
+        "interval": 1,
+        "format": "{avg_frequency:4} GHz ",
+        "max-width": 3,
+
+        "tooltip": false
+        
+    },
+
+    "memory": {
+        "interval": 2,
+
+        "format": "{used:4} GiB "
+    },
+
+    "custom/cpuavg": {
+        
+        "exec":"$HOME/.config/waybar/custom/cpufreqavg.sh",
+        "format": "{} GHz | ",
+        "escape": true,
+        "restart-interval": 1 
+    },
+
+    "custom/test": {
+        
+        "exec":"$HOME/.config/waybar/custom/pisah.sh",
+        "format": "{}",
+        "escape": true,
+        "tooltip": false
+    },
+
+    "temperature": {
+        "interval": 1,
+
+         "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "critical-threshold": 95,
+        "format-critical": "{temperatureC:2}°C {icon}",
+
+        "format": "{temperatureC:2}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+
+
+    "group/cpuall": {
+        "orientation": "inherit",
+        "align": 1,
+        "modules": [
+            "custom/cpuavg",
+            "temperature"
+        ]
+    },
+
+
+
+
+    "backlight": {
+
+        "format": "{percent}% {icon} |",
+        "format-icons": ["", "", "", ""]
+    },
+    "battery": {
+        "states": {
+
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+
+    "group/batterylight": {
+        "orientation": "horizontal",
+        "modules": [
+            "backlight",
+            "battery"
+        ]
+    },
+
+    "group/leftbar": {
+        "orientation": "horizontal",
+        "modules": [
+            "clock",
+            "hyprland/workspaces"
+        ]
+    },
+
+    "network": {
+        "interval": 1,
+        "format-wifi": "{bandwidthTotalBytes} ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{bandwidthTotalBytes} ",
+        "tooltip-format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    },
+    "pulseaudio": {
+        "width": "{volume}%",
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" 
+    },
+
+    "cava": {
+        "framerate": 24,
+        "autosens": 1,
+        "sensitivity": 2,
+        "bars": 14,
+        "lower_cutoff_freq": 20,
+        "higher_cutoff_freq": 350,
+        "method": "pulse",
+        "source": "auto",
+        "sample_rate": 44100,
+        "sample_bits": 16,
+        "stereo": false,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": true,
+        "waves": false,
+        "noise_reduction": 0.10,
+        "input_delay": 2,
+        "sleep_timer": 5,
+        "format-icons" : ["<span font_desc='JetBrains Mono'>▁</span>", "<span font_desc='JetBrains Mono'>▂</span>", "<span font_desc='JetBrains Mono'>▃</span>", "<span font_desc='JetBrains Mono'>▄</span>", "<span font_desc='JetBrains Mono'>▅</span>", "<span font_desc='JetBrains Mono'>▆</span>", "<span font_desc='JetBrains Mono'>▇</span>", "<span font_desc='JetBrains Mono'>█</span>" ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+
+
+
+
+    "group/group-power": {
+        "orientation": "horizontal",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "notification",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/notification",
+            "custom/legion_rapidcharge",
+            "custom/ideapad_conservative",
+            "idle_inhibitor",
+        ]
+    },
+    "custom/quit": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "reboot"
+    },
+    "custom/ideapad_conservative": {
+        "exec":"$HOME/.config/waybar/custom/lenovo_conservation_check.sh",
+        "restart-interval": 10,
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "pkexec /home/kayagi/.config/waybar/custom/lenovo_conservation.sh "
+    },
+
+    "custom/legion_rapidcharge": {
+        "exec":"$HOME/.config/waybar/custom/rapidcharge_check.sh",
+        "restart-interval": 10,
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "on-click": "pkexec /home/kayagi/.config/waybar/custom/rapidcharge.sh "
+    },
+    "custom/power": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "shutdown now"
+    },
+
+    "custom/wlogout": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "wlogout -b 2 -r 5 -p layer-shell"
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "tooltip": false,
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "<span foreground='red'>!</span>",
+          "none": "",
+          "dnd-notification": "<span foreground='red'>!</span>",
+          "dnd-none": "",
+          "inhibited-notification": "<span foreground='red'>!</span>",
+          "inhibited-none": "",
+          "dnd-inhibited-notification": "<span foreground='red'>!</span>",
+          "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+      },
+
+}

@@ -1,0 +1,68 @@
+swipe:
+  3:
+    up:
+      command: 'tofi-run | xargs hyprctl dispatch exec --'
+    down:
+      command: 'hyprctl dispatch killactive'
+    left:
+      command: 'hyprctl dispatch workspace e+1'
+    right:
+      command: 'hyprctl dispatch workspace e-1'
+  4:
+    left:
+      command: 'hyprctl dispatch movefocus l'
+    right:
+      command: 'hyprctl dispatch movefocus r'
+    up:
+      command: 'hyprctl dispatch movefocus u'
+    down:
+      command: 'hyprctl dispatch movefocus d'
+
+pinch:
+  2:
+    out:
+      begin:
+       command: xdotool keydown ctrl
+      update:
+        command: xdotool click 4
+
+      end:
+        command: xdotool keyup ctrl
+
+    in:
+      begin:
+       command: xdotool keydown ctrl
+      update:
+        command: xdotool click 5
+
+      end:
+        command: xdotool keyup ctrl
+
+hold:
+  2:
+    command: "hyprshot -m window" # Activity
+  3:
+    command: "hyprshot -m region" # Activity
+  4:
+    command: "hyprshot -m output" # Activity
+
+
+rotate:
+  2:
+    clockwise:
+      command: 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 12%+' # Volume up
+    counterclockwise:
+      command: 'wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 12%-' # Volume down
+  3:
+    clockwise:
+      command: 'brightnessctl set --device=amdgpu_bl0 12%+' # Brightness up
+    counterclockwise:
+      command: 'brightnessctl set --device=amdgpu_bl0 12%-' # Brightness down
+
+threshold:
+  swipe: 0.1
+  pinch: 0.1
+
+interval:
+  swipe: 1
+  pinch: 1

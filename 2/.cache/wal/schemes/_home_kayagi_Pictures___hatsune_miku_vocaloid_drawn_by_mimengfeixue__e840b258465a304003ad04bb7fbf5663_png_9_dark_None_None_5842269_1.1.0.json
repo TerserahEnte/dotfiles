@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/kayagi/Pictures/__hatsune_miku_vocaloid_drawn_by_mimengfeixue__e840b258465a304003ad04bb7fbf5663.png",
+    "alpha": "100",
+    "special": {
+        "background": "#000205",
+        "foreground": "#bfbfc0",
+        "cursor": "#bfbfc0"
+    },
+    "colors": {
+        "color0": "#000205",
+        "color1": "#597E6F",
+        "color2": "#1C728B",
+        "color3": "#4F738C",
+        "color4": "#2B90A2",
+        "color5": "#5FA4A8",
+        "color6": "#60C0CA",
+        "color7": "#bfbfc0",
+        "color8": "#3f4143",
+        "color9": "#597E6F",
+        "color10": "#1C728B",
+        "color11": "#4F738C",
+        "color12": "#2B90A2",
+        "color13": "#5FA4A8",
+        "color14": "#60C0CA",
+        "color15": "#bfbfc0"
+    }
+}

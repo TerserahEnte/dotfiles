@@ -1,0 +1,52 @@
+* {
+	background-image: none;
+	box-shadow: none;
+	font-family: Product Sans;
+	font-size: 24px;
+}
+
+window {
+	background-image: url( '/home/kayagi/.cache/wlogout-bg.png' );
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 1920px;
+
+
+}
+
+button {
+	margin: 10px 100px;
+    border-radius: 255px;
+    border-color: rgba(197, 221, 186, 1);
+    color: white;
+	background: rgba(0, 0, 0, 0.2);
+	border-style: solid;
+	border-width: 9px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 64px;
+}
+
+button:focus, button:active, button:hover {
+	background: rgba(0, 0, 0, 0.2);
+	outline-style: none;
+	background-size: 128px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#lock {
+    background-image: url( '/home/kayagi/.config/wlogout/icons/lock.png' );
+}
+
+#logout {
+    background-image: url( '/home/kayagi/.config/wlogout/icons/logout.png' );
+}
+
+#shutdown {
+    background-image: url( '/home/kayagi/.config/wlogout/icons/power.png' );
+}
+
+#reboot {
+    background-image: url( '/home/kayagi/.config/wlogout/icons/reboot.png' );
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "cssPriority": "application",
+  "control-center-margin-top": 10,
+  "control-center-margin-bottom": 0,
+  "control-center-margin-right": 10,
+  "control-center-margin-left": 0,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "notification-icon-size": 64,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 50,
+  "timeout": 5,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "relative-timestamps": true,
+  "control-center-width": 500,
+  "control-center-height": 900,
+  "notification-window-width": 400,
+  "keyboard-shortcuts": true,
+  "image-visibility": "when-available",
+  "transition-time": 200,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+  "scripts": {
+    "example-script": {
+      "exec": "echo 'Do something...'",
+      "urgency": "Normal"
+    },
+    "example-action-script": {
+      "exec": "echo 'Do something actionable!'",
+      "urgency": "Normal",
+      "run-on": "action"
+    }
+  },
+
+  "widgets": [
+    "menubar#label",
+    "buttons-grid",
+    "backlight",
+    "volume",
+
+    "inhibitors",
+    "mpris",
+    "title",
+    "dnd",
+    "notifications"
+  ],
+  "widget-config": {
+    "inhibitors": {
+      "text": "Inhibitors",
+      "button-text": "Clear All",
+      "clear-all-button": true
+    },
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear All"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "label": {
+      "max-lines": 5,
+      "text": "Media"
+    },
+    "mpris": {
+      "image-size": 96,
+      "image-radius": 12
+    },
+    "backlight": {
+      "label": "",
+      "device": "amdgpu_bl0",
+      "min": 0
+    },
+    "volume": {
+      "label": ""
+    },
+    "menubar#label": {
+      "buttons#power-buttons": {
+        "position": "right",
+        "actions": [ 
+            {
+              "label": "", 
+              "command": "wlogout -b 2 -r 5 -p layer-shell"
+
+            }
+        ]
+      },
+      "menu#powermode-buttons": {
+        "label": "", 
+        "position": "left",
+        "actions": [ 
+          {
+            "label": "Performance",
+            "command": "powerprofilesctl set performance"
+          },
+          {
+            "label": "Balanced",
+            "command": "powerprofilesctl set balanced"
+          },
+          {
+            "label": "Power-saver",
+            "command": "powerprofilesctl set power-saver"
+          }
+        ]
+      }
+    },
+    "buttons-grid": {
+      "actions": [
+        {
+          "label": "",
+          "type": "toggle",
+          "toggle": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && brightnessctl set 1 --device platform::kbd_backlight || brightnessctl set 0 --device platform::kbd_backlight'",
+          "update-command": "sh -c '[[ $(brightnessctl get --device platform::kbd_backlight) == \"1\" ]] && echo true || echo false'"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "toggle": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && echo '1' > /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/VPC2004:00/conservation_mode || echo '0' > /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/VPC2004:00/conservation_mode'",
+          "update-command": "sh -c '[[ $(cat /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/VPC2004:00/conservation_mode) == \"1\" ]] && echo true || echo false'"
+        },
+        {
+          "label": "",
+          "type": "toggle",
+          "toggle": true,
+          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && echo 1 > /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/rapidcharge || echo 0 > /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/rapidcharge'",
+          "update-command": "sh -c '[[ $(cat /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/rapidcharge) == \"1\" ]] && echo true || echo false'"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,58 @@
+.xfce4-panel .tasklist .toggle:hover {
+    background-color: #9CB2CA;
+    color: black;
+    padding: 3px;
+    border-radius: 20px; }
+    
+.flat,
+.toggle {
+  font-family: 'Ubuntu';
+}
+.flat:hover,
+.toggle:hover {
+  font-family: 'Ubuntu';
+}
+.flat:checked,
+.toggle:checked {
+  font-family: 'Ubuntu';
+  border-radius: 10px;
+  padding: 3px;
+}
+
+#clock-button {
+    color: black;
+    border-radius: 20px;
+    background-color: #9CB2CA; }
+    
+#whiskermenu-button {
+    color: black;
+    border-radius: 20px;
+    background-color: #9CB2CA; }
+
+#whiskermenu-button .toggle:checked {
+    color: black;
+    border-radius: 10px;
+    background-color: #FFFFFF; }
+
+.xfce4-panel #xfce-panel-toggle-button {
+    color: black;
+    border-radius: 20px;
+    padding: 3px;
+    background-color: #9CB2CA; }
+
+
+    
+.xfce4-panel #netload-7, .label {
+    color: black;
+    border-radius: 20px;
+    background-color: #9CB2CA; }
+ 
+.xfce4-panel #pulseaudio-button {
+	    color: black;
+    border-radius: 20px;
+    background-color: #9CB2CA; }    
+    
+    
+  .xfce4-panel .vertical .background {
+    background-color: rgba(0, 0, 0, 100); }
+@import 'colors.css';

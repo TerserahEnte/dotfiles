@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get the current brightness level
+current_brightness=$(brightnessctl get --device platform::kbd_backlight)
+
+# Check if the current brightness is 1
+if [[ $current_brightness -eq 1 ]]; then
+  # Set brightness to 0 if it's currently 1
+  brightnessctl set 0 --device platform::kbd_backlight 
+else
+  # Decrease brightness by 1 otherwise
+  brightnessctl set 1 --device platform::kbd_backlight 
+fi

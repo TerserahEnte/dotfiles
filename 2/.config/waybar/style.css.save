@@ -1,0 +1,160 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Raleway;
+
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    color: white;
+}
+
+tooltip {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#workspaces button {
+    padding: 0 6px;
+    background: transparent;
+    color: black;
+    border-radius: 50%;
+    font-size: 15px;
+}
+
+#workspaces button.active {
+    background:  #EBD4AA;
+    border-radius: 50%;
+    color: black;
+    margin: 0px 10px 0px 10px;
+    font-size: 18px;
+}
+
+#mode, #battery {
+    padding: 0 10px;
+}
+
+#clock {
+    padding-left: 10px;
+}
+
+#mode {
+    background: rgba(100, 114, 125, 0.5);
+    border-bottom: 3px solid white;
+}
+
+#leftbar  {
+    background-color: #9cb2ca;
+    color: black;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+@keyframes text {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+
+#memory{
+    min-width: 100px;
+
+    background-color: #9cb2ca;
+    color: black;
+
+    border-radius: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#cpuall {
+    min-width: 100px;
+
+    background-color: #9cb2ca;
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+}
+
+#custom-cpuavg {
+    padding-left: 5px;
+}
+
+
+
+#temperature.critical {
+    background-color: #B74950;
+    color: white;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+
+#batterylight {
+    background-color: #9CB2CA;
+	border-radius:20px;
+    color: black;
+    padding-left: 10px;
+    padding-right: 0px;
+}
+
+#battery.charging {
+
+    color: white;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#pulseaudio {
+    background-color: #9CB2CA;
+	border-radius:20px;
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#cava {
+    background-color: #EBD4AA;
+	border-radius:20px;
+    color: black;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#window {
+    border-radius:20px;
+    color:  white;
+}
+
+
